@@ -7,7 +7,16 @@ output: html_document
 
 
 
-mf_init() is used to initiate a map. It plots x as an invisible layer. 
+# The `mf_init()` function
+
+The best way to export maps with `mapsf` is with its dedicated function `mf_init()`.   
+
+As its name suggests, `mf_init()` is used to initiate a map in an R session where maps are displayed in the plot window. It can also be used to export maps in PNG or SVG formats. 
+
+
+## Initiate a map
+
+`mf_init()` plots `x`, an `sf` object, as an invisible layer. Other geographic layers can be overlayed upon this initial layer. 
 
 ```{r}
 library(mapsf)
@@ -17,8 +26,7 @@ mf_map(mtq, add = TRUE)
 ```
 
 
-
-mf_init() can be used to set a theme. 
+One can also use `mf_init()` to set a theme. 
 
 ```{r}
 mf_init(x = mtq, theme = "barcelona")
@@ -27,9 +35,7 @@ mf_layout()
 ```
 
 
-
-
-mf_init() can be used to extend the map space on one or several side of the figure. 
+The `expandBB` argument can be used to extend the map space on one or several sides of the figure. 
 
 ```{r}
 # extend the map space on the left (50% of x width) 
@@ -40,7 +46,7 @@ mf_layout()
 
 
 
-mf_init() can be used to center a map on a specific area.  
+`mf_init()` can be used to center a map on a specific area.  
 
 ```{r}
 # Extract Fort-de-France municipality
@@ -52,11 +58,13 @@ mf_layout()
 ```
 
 
+## Export a Map
 
-mf_init() can be used to export maps in PNG or SVG. 
-The idea is to export a figure that have the same width/height ratio of a spatial object, taking into account margins and title. 
-If width is specified, then height is deducted from the width/height ratio of x, figure margins and title size.
-If height is specified, then width is deducted from the width/height ratio of x, figure margins and title size.
+`mf_init()` can be used to export maps in PNG or SVG. 
+The idea is to export a figure that have the same width/height ratio of a spatial object, taking into account margins and title: 
+
+- If width is specified, then height is deducted from the width/height ratio of x, figure margins and title size.  
+- If height is specified, then width is deducted from the width/height ratio of x, figure margins and title size.
 
 
 ```{r, results="hide"}
@@ -81,7 +89,8 @@ dev.off()
 ```
 ![](fixed_height.png)
 
-Of course, if expandBB is used, the ratio of the figure is adapted to its value. 
+Of course, if `expandBB` is used, the ratio of the figure is adapted to its value.
+
 ```{r, results="hide"}
 mf_init(x = mtq, theme = "candy", expandBB = c(0,0,0,.5),
         export = "png", filename = "fixed_width_expand.png",
